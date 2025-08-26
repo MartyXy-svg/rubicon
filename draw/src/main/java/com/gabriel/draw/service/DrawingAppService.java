@@ -10,17 +10,17 @@ import com.gabriel.drawfx.service.ScalerService;
 
 import java.awt.*;
 
-public class  DrawingAppService implements AppService {
+public class DrawingAppService implements AppService {
     final private Drawing drawing;
     private Color color;
-    Color fill;
+    private Color fill;
     private ShapeMode shapeMode = ShapeMode.Line;
     private DrawMode drawMode = DrawMode.Idle;
 
     MoverService moverService;
     ScalerService scalerService;
 
-    public DrawingAppService(){
+    public DrawingAppService() {
         drawing = new Drawing();
         moverService = new MoverService();
         scalerService = new ScalerService();
@@ -63,12 +63,13 @@ public class  DrawingAppService implements AppService {
 
     @Override
     public void setFill(Color color) {
-        this.fill = fill;
+        this.fill = color; // ✅ fixed (was assigning fill to itself)
     }
 
     @Override
     public void move(Shape shape, Point newLoc) {
-        moverService.move(shape, newLoc);}
+        moverService.move(shape, newLoc);
+    }
 
     @Override
     public void scale(Shape shape, Point newEnd) {
@@ -77,8 +78,12 @@ public class  DrawingAppService implements AppService {
 
     @Override
     public void create(Shape shape) {
+        Color c = color != null ? color : Color.BLACK;
+        shape.setColor(c);
+        System.out.println("Creating shape with color: " + c);
         this.drawing.getShapes().add(shape);
     }
+
 
     @Override
     public void close() {
@@ -89,4 +94,6 @@ public class  DrawingAppService implements AppService {
     public Object getModel() {
         return drawing;
     }
+
+
 }

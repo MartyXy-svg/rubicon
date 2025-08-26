@@ -13,7 +13,7 @@ public class Line extends Shape {
     public Line(Point start, Point end){
         super(start);
         this.setEnd(end);
-        this.setColor(Color.RED);
+        //this.setColor(Color.GREEN);
         this.setRendererService(new LineRendererService());
     }
 }

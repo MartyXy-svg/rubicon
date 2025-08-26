@@ -7,5 +7,5 @@ import java.awt.*;
 public final class MoverService {
     public void  move(Shape shape, Point newLoc){
         shape.setLocation( newLoc);
-     }
+    }
 }
